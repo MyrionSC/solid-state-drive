@@ -6,7 +6,7 @@
  */
 
 export class Player extends Phaser.GameObjects.Image {
-  private cursors: any;
+  private cursors: CursorKeys;
   private walkingSpeed: number = 5;
 
   constructor(params) {
@@ -19,14 +19,15 @@ export class Player extends Phaser.GameObjects.Image {
   }
 
   private initImage(): void {
-    this.setScale(0.8);
-    this.setSize(40, 50);
+    this.setScale(0.1);
+    this.setSize(20, 20);
     this.setAlpha(1);
     this.setFlip(false, false);
     this.setOrigin(0.4, 0.4);
     this.setAngle(0);
   }
   private initInput(params): void {
+    // this.cursors = params.scene.input.keyboard.createCursorKeys();
     this.cursors = params.scene.input.keyboard.createCursorKeys();
   }
 
@@ -38,12 +39,16 @@ export class Player extends Phaser.GameObjects.Image {
     if (this.cursors.right.isDown) {
       this.x += this.walkingSpeed;
       this.setFlipX(false);
-    } else if (this.cursors.left.isDown) {
+    }
+
+    if (this.cursors.left.isDown) {
       this.x -= this.walkingSpeed;
       this.setFlipX(true);
-    } else if (this.cursors.up.isDown) {
+    }
+    if (this.cursors.up.isDown) {
       this.y -= this.walkingSpeed;
-    } else if (this.cursors.down.isDown) {
+    }
+    if (this.cursors.down.isDown) {
       this.y += this.walkingSpeed;
     }
   }
